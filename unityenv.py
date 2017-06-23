@@ -77,6 +77,9 @@ class UnityEnvironment(object):
             self._loaded = True
             self.logger.info("'{}' started successfully!".format(self._environment_name))
 
+            self.resolution = 80
+            self.bw_render = False
+
         except socket.error:
             raise Exception("Couldn't launch new environment because communication port {} is still in use. "
                             "You may need to manually close a previously opened environment.".format(str(port)))
@@ -117,7 +120,7 @@ class UnityEnvironment(object):
     def done(self):
         return self._done
 
-    def _process_pixels(self, image_bytes=None, resolution=80, bw=False):
+    def _process_pixels(self, image_bytes=None):
         """
         Converts bytearray observation image into numpy array, resizes it, and optionally converts it to greyscale
         :param image_bytes: input bytearray corresponding to image
@@ -128,9 +131,10 @@ class UnityEnvironment(object):
         s = bytearray(image_bytes)
         image = Image.open(io.BytesIO(s))
         s = np.array(image)
-        s = scipy.misc.imresize(s, [resolution, resolution]) / 255.0
-        if bw:
+        s = scipy.misc.imresize(s, [self.resolution, self.resolution]) / 255.0
+        if self.bw_render:
             s = np.max(s, axis=2)
+            s = np.reshape(s, [self.resolution, self.resolution, 1])
         return s
 
     def __str__(self):
@@ -148,9 +152,9 @@ class UnityEnvironment(object):
                                            ', '.join(self._action_descriptions))
         return message
 
-    def _get_state_image(self, resolution=80):
+    def _get_state_image(self):
         s = self._conn.recv(self._buffer_size)
-        s = self._process_pixels(image_bytes=s, resolution=resolution)
+        s = self._process_pixels(image_bytes=s)
         self._conn.send("RECEIVED")
         return s
 
