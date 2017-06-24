@@ -133,7 +133,7 @@ class UnityEnvironment(object):
         s = np.array(image)
         s = scipy.misc.imresize(s, [self.resolution, self.resolution]) / 255.0
         if self.bw_render:
-            s = np.max(s, axis=2)
+            s = np.mean(s, axis=2)
             s = np.reshape(s, [self.resolution, self.resolution, 1])
         return s
 
