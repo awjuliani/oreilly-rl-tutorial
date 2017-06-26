@@ -28,6 +28,6 @@ Then navigate to `localhost:8888` to access each training notebook.
 
 To monitor training progress, run the following from the root directory of this repo:
 
-`tensorboard --logdir='./`
+`tensorboard --logdir='./summaries`
 
 Then navigate to `localhost:6006` to monitor progress with Tensorboard.
