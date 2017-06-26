@@ -7,4 +7,4 @@ Required Unity Environments can be downloaded [here](https://drive.google.com/dr
 
 To monitor training progress, run the following from the root directory of this repo:
 
-`tensorboard --logdir='./'
+`tensorboard --logdir='./`
