@@ -13,7 +13,7 @@ from sys import platform
 
 
 class UnityEnvironment(object):
-    def __init__(self, file_name, train_model=True, worker_num=0, headless=True, config=None):
+    def __init__(self, file_name, train_model=True, worker_num=0, headless=False, config={}):
         """
         Starts a new unity environment and establishes a connection with the environment.
         Inspired by OpenAI gym: https://github.com/openai/gym/tree/master/gym/envs
@@ -63,7 +63,7 @@ class UnityEnvironment(object):
             self._conn, _ = self._socket.accept()
 
             # Get state and action space from environment
-            p = self._conn.recv(self._buffer_size)
+            p = self._conn.recv(self._buffer_size).decode('utf-8')
             p = json.loads(p)
             self._state_space_size = p["state_size"]
             self._number_observations = p["observation_size"]
@@ -73,7 +73,7 @@ class UnityEnvironment(object):
             self._action_space_type = p["action_space_type"]
             self._state_space_type = p["state_space_type"]
             self._number_agents = p["num_agents"]
-            self._conn.send(".")
+            self._conn.send(b".")
             self._loaded = True
             self.logger.info("'{}' started successfully!".format(self._environment_name))
 
@@ -155,11 +155,11 @@ class UnityEnvironment(object):
     def _get_state_image(self):
         s = self._conn.recv(self._buffer_size)
         s = self._process_pixels(image_bytes=s)
-        self._conn.send("RECEIVED")
+        self._conn.send(b"RECEIVED")
         return s
 
     def _get_state_dict(self):
-        state = self._conn.recv(self._buffer_size)
+        state = self._conn.recv(self._buffer_size).decode('utf-8')
         state_dict = json.loads(state)
         return state_dict
 
@@ -189,7 +189,7 @@ class UnityEnvironment(object):
     def _send_action(self, action, value):
         self._conn.recv(self._buffer_size)
         action_message = {"action": action, "value": value}
-        self._conn.send(json.dumps(action_message))
+        self._conn.send(json.dumps(action_message).encode('utf-8'))
 
     def step(self, action, value):
         """
@@ -201,13 +201,13 @@ class UnityEnvironment(object):
         """
         if self._loaded and not self._done:
             if isinstance(action, (int, np.int_)):
-                action = [action]
+                action = [int(action)]
             if isinstance(value, (int, np.int_, float, np.float_)):
-                value = [value]
+                value = [float(value)]
             if (self._action_space_type == "discrete" and len(action) == self._number_agents) or \
                     (self._action_space_type == "continuous" and len(
                         action) == self._action_space_size * self._number_agents):
-                self._conn.send("STEP")
+                self._conn.send(b"STEP")
                 self._send_action(action, value)
                 return self._get_state()
             else:
@@ -227,7 +227,7 @@ class UnityEnvironment(object):
         Sends a shutdown signal to the unity environment, and closes the socket connection.
         """
         if self._loaded:
-            self._conn.send("EXIT")
+            self._conn.send(b"EXIT")
             self._conn.close()
             self._socket.close()
             self._loaded = False
