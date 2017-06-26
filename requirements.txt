@@ -3,3 +3,4 @@ Pillow
 matplotlib
 numpy
 scipy
+jupyter
