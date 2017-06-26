@@ -4,7 +4,7 @@ Contains Jupyter notebooks associated with the [*Deep Reinforcement Learning Tut
 
 Required Unity Environments can be downloaded [here](https://drive.google.com/drive/folders/0BxZSPcA0DrkfQ2pPWkRFQkNiTnc?usp=sharing). Download the zip associated with your OS (ie Linux, Mac, or Windows) and unzip the files to the root directory of this repo.
 
-All notebooks and environments tested with Python2 on macOS Sierra.
+All notebooks and environments tested with Python2 and Python3 on macOS Sierra.
 
 ## Requirements
 * Tensorflow
@@ -17,6 +17,10 @@ All notebooks and environments tested with Python2 on macOS Sierra.
 To install dependencies, run:
 
 `pip install -r requirements.txt`
+
+or 
+
+`pip3 install -r requirements.txt`
 
 ## Training RL Agents
 
