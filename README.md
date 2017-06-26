@@ -18,13 +18,13 @@ To install dependencies, run:
 
 `pip install -r requirements.txt`
 
+## Training RL Agents
+
 To launch jupyter, run:
 
 `jupyter notebook`
 
 Then navigate to `localhost:8888` to access each training notebook.
-
-## Training Models
 
 To monitor training progress, run the following from the root directory of this repo:
 
