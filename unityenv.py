@@ -169,7 +169,7 @@ class UnityEnvironment(object):
         :return: A new (observations, state) tuple corresponding to the initial reset state of the environment.
         """
         if self._loaded:
-            self._conn.send("RESET")
+            self._conn.send(b"RESET")
             observations, state, reward, done = self._get_state()
             return observations, state
         else:
