@@ -2,7 +2,7 @@
 
 Contains Jupyter notebooks associated with the [*Deep Reinforcement Learning Tutorial*](https://conferences.oreilly.com/artificial-intelligence/ai-ny/public/schedule/detail/59390) given at the O'Reilly 2017 NYC AI Conference.
 
-Required Unity Environments can be downloaded [here](https://drive.google.com/drive/folders/0BxZSPcA0DrkfQ2pPWkRFQkNiTnc?usp=sharing). Download the zip associated with your OS (ie Linux, Mac, or Windows) and unzip each of the files within the zipped folder to the root directory of this repo.
+Required Unity Environments can be downloaded [here](https://drive.google.com/drive/folders/0BxZSPcA0DrkfQ2pPWkRFQkNiTnc?usp=sharing). Download and unzip the .zip file associated with your OS (ie Linux, Mac, or Windows) and move each of the files within the unzipped folder (ie 2DBall, 3DBall, etc) to the root directory of this repository.
 
 All notebooks and environments tested with Python2 and Python3 on macOS Sierra.
 
@@ -21,6 +21,8 @@ To install dependencies, run:
 or 
 
 `pip3 install -r requirements.txt`
+
+If your Python environment doesn't include `pip`, see these [instructions](https://packaging.python.org/guides/installing-using-linux-tools/#installing-pip-setuptools-wheel-with-linux-package-managers) on installing it.
 
 ## Training RL Agents
 
