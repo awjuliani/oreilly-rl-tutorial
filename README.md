@@ -28,7 +28,7 @@ If your Python environment doesn't include `pip`, see these [instructions](https
 
 To launch jupyter, run:
 
-`jupyter notebook`
+`jupyter notebook` 
 
 Then navigate to `localhost:8888` to access each training notebook.
 
