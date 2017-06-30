@@ -37,3 +37,15 @@ To monitor training progress, run the following from the root directory of this 
 `tensorboard --logdir='./summaries'`
 
 Then navigate to `localhost:6006` to monitor progress with Tensorboard.
+
+## Troubleshooting
+
+### macOS Permission Error
+
+If you recieve a permission error when attempting to launch an environment on macOS, run:
+
+`chmod -R 755 *.app` 
+
+### Filename not found
+
+If you recieve a file-not-found error while attempting to launch an environment, ensure that the environment files are in the root repository directory. For example, if there is a sub-folder containing the environment files, those files should be removed from the sub-folder and moved to the root. 
