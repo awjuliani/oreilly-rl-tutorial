@@ -31,11 +31,6 @@ class UnityEnvironment(object):
         self._buffer_size = 120000
 
         try:
-            # Establish communication socket
-            self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self._socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            self._socket.bind(("localhost", port))
-
             cwd = os.getcwd()
             launch_string = ""
             if platform == "linux" or platform == "linux2":
@@ -57,6 +52,11 @@ class UnityEnvironment(object):
                  '--port', str(port),
                  '--train', str(train_model),
                  '{}'.format('-batchmode' if headless else '')] + config_list)
+
+            # Establish communication socket
+            self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self._socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            self._socket.bind(("localhost", port))
 
             # Start listening on socket
             self._socket.listen(1)
@@ -81,6 +81,7 @@ class UnityEnvironment(object):
             self.bw_render = False
 
         except socket.error:
+            self.close()
             raise Exception("Couldn't launch new environment because communication port {} is still in use. "
                             "You may need to manually close a previously opened environment.".format(str(port)))
 
