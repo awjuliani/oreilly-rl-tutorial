@@ -4,8 +4,6 @@ Contains Jupyter notebooks associated with the [*Deep Reinforcement Learning Tut
 
 Required Unity Environments can be downloaded [here](https://drive.google.com/drive/folders/0BxZSPcA0DrkfQ2pPWkRFQkNiTnc?usp=sharing). Download and unzip the .zip file associated with your OS (ie Linux, Mac, or Windows) and move each of the files within the unzipped folder (ie 2DBall, 3DBall, etc) to the root directory of this repository.
 
-All notebooks and environments tested with Python2 and Python3 on macOS Sierra.
-
 ## Requirements
 * Tensorflow (version 1.0+)
 * Pillow
