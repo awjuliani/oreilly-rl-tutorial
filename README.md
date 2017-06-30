@@ -7,7 +7,7 @@ Required Unity Environments can be downloaded [here](https://drive.google.com/dr
 All notebooks and environments tested with Python2 and Python3 on macOS Sierra.
 
 ## Requirements
-* Tensorflow
+* Tensorflow (version 1.0+)
 * Pillow
 * Matplotlib
 * numpy
