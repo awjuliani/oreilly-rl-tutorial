@@ -201,7 +201,7 @@ class UnityEnvironment(object):
         :return: An (observations, state, reward, done) tuple corresponding to the new state of the environment.
         """
         if self._loaded and not self._done:
-            if isinstance(action, (int, np.int_)):
+            if isinstance(action, (int, np.int_, np.int64)):
                 action = [int(action)]
             if isinstance(value, (int, np.int_, float, np.float_)):
                 value = [float(value)]
