@@ -4,7 +4,6 @@ import json
 import logging
 import numpy as np
 import os
-import scipy.misc
 import socket
 import subprocess
 
@@ -132,7 +131,7 @@ class UnityEnvironment(object):
         s = bytearray(image_bytes)
         image = Image.open(io.BytesIO(s))
         s = np.array(image)
-        s = scipy.misc.imresize(s, [self.resolution, self.resolution]) / 255.0
+        s = np.array(Image.fromarray(s).resize((self.resolution, self.resolution))) / 255.0
         if self.bw_render:
             s = np.mean(s, axis=2)
             s = np.reshape(s, [self.resolution, self.resolution, 1])
